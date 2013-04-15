@@ -1,0 +1,20 @@
+<table class="table table-striped table-bordered table-condensed" >
+            <thead> 
+              <th>Total Commits</th>
+              <th>Avg. Files Touched</th>
+              <th>Avg. Additions</th>
+              <th>Avg. Deletions</th>
+              <th>Avg. LOC Touched</th>
+              <th>Max. Commit Size</th>
+            </thead>
+            <% repo.snapshots_for(committer).each do |snapshot| %>
+            <tr>
+              <td><%= snapshot.commit_count%> </td>
+              <td><%= snapshot.files_touched%> </td>
+              <td><%= snapshot.additions%> </td>
+              <td><%= snapshot.deletions%> </td>
+              <td><%= snapshot.loc_touched%> </td>
+              <td><%= snapshot.max_commit_size%> </td>
+            </tr>
+            <% end %>
+        </table>

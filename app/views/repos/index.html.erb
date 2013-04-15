@@ -1,0 +1,28 @@
+
+
+<div class="accordion" id="repo_accordian">
+<% @repos.each do |repo| %>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a  class="accordion-toggle" 
+          data-toggle="collapse" 
+          data-parent="#repo_accordian" href="#<%= repo_accordian_id(repo) %>" >
+        <%= repo.name %> for <%= repo.user %>
+      </a>
+    </div>
+    <div id="<%= repo_accordian_id(repo) %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="accordion" id="<%= repo_committer_accordian(repo) %>">
+          <% repo.committers.each do |c| %>
+                <%= render "committers/index", 
+                        repo: repo,
+                        committer: c, 
+                        parent_id: repo_committer_accordian(repo)  %>
+          
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

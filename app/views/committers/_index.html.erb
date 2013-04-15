@@ -1,0 +1,31 @@
+<div class="accordion-group">
+  <div class="accordion-heading">
+    <a  class="accordion-toggle" 
+      data-toggle="collapse" 
+      data-parent="#<%= parent_id %>" href="#<%= committer_accordian_id(committer) %>" >
+      <%= committer.email%>
+    </a>
+  </div>
+  <div id="<%= committer_accordian_id(committer) %>" class="accordion-body collapse">
+    <ul  class="nav nav-tabs">
+      <li class="active">
+      <a data-toggle="tab" href='#<%= "recent_#{committer.id}" %>' >Recent</a>
+      </li>
+      <li><a data-toggle="tab" href='#<%= "summary_#{committer.id}" %>' >Summary</a></li>
+    </ul>
+    <div class="tab-content">
+      <%= render "snap_shots/index",
+                committer: committer, 
+                snapshots: repo.snapshots_for(committer) %>
+
+      </div>
+      <div id='<%= "summary_#{committer.id}" %>'  class="tab-pane">
+         <%= render "snap_shots/summary",
+                committer: committer, 
+                repo: repo
+          %>
+      </div>
+    </div>
+  </div>
+
+</div>
