@@ -23,4 +23,12 @@ class Repo < ActiveRecord::Base
     	SnapShot.where("committer_id= ? and repo_id = ?", committer.id, self.id).order("created_at DESC")
     end
 
+    def summary_for(committer)
+        snapshots = snapshots_for(committer)
+        total_commits = snapshots.inject(0) { |v, s| v + s.commit_count }
+
+
+    end
+
+
 end
