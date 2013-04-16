@@ -4,6 +4,6 @@ module ApplicationHelper
   	end
 
   	def tod(dt) 
-  		dt.strftime("%H:%M")
+  		(dt + Time.now.utc_offset.seconds).strftime("%H:%M")
   	end
 end

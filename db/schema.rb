@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415140857) do
+ActiveRecord::Schema.define(:version => 20130416164918) do
 
   create_table "committers", :force => true do |t|
     t.string   "email"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130415140857) do
   create_table "trackings", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "since"
   end
 
 end
