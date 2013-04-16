@@ -14,6 +14,8 @@
       <li><a data-toggle="tab" href='#<%= "summary_#{committer.id}" %>' >Summary</a></li>
     </ul>
     <div class="tab-content">
+      <div id='<%= "recent_#{committer.id}" %>'  class="tab-pane active">
+
       <%= render "snap_shots/index",
                 committer: committer, 
                 snapshots: repo.snapshots_for(committer) %>
