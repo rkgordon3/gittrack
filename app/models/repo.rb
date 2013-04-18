@@ -26,8 +26,6 @@ class Repo < ActiveRecord::Base
     def summary_for(committer)
         snapshots = snapshots_for(committer)
         total_commits = snapshots.inject(0) { |v, s| v + s.commit_count }
-
-
     end
 
 

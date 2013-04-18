@@ -12,7 +12,7 @@ module ReposHelper
 		"snapshot_accoridian_#{snap.id}"
 	end
 
-	def committer_accordian_id(committer) 
-		"committer_accordian_#{committer.id}"
+	def committer_accordian_id(repo, committer) 
+		"committer_accordian_#{repo.id}_#{committer.id}"
 	end
 end

@@ -37,12 +37,10 @@ def persist(user, repo, snapshot, email)
 	count = snapshot.commit_count
 	committer = Committer.find_by_email(email)
 	puts "in persist Committer #{committer}"
-	if committer.nil?
-		puts 'create new committer'
-		committer = Committer.create!(email: email)
-				puts "create new committer repo #{committer.id} #{repo_model.id}"
-		CommittersRepos.create!(committer_id: committer.id, repo_id: repo_model.id)
-	end
+	committer = Committer.create!(email: email) if committer.nil?
+
+	CommittersRepos.find_by_committer_id_and_repo_id(committer.id, repo_model.id) || CommittersRepos.create!(committer_id: committer.id, repo_id: repo_model.id)
+
 	ss = SnapShot.create!(repo_id: repo_model.id,
 				 committer_id: committer.id,
 				 commit_count: count,
