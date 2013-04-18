@@ -21,7 +21,36 @@
               <td><%= snapshot.deletions%> </td>
               <td><%= snapshot.loc_touched%> </td>
               <td><%= snapshot.max_commit_size%> </td>
+             
+            </tr>
+            <tr>
+                <td colspan='8'>
+                <div  class="accordion" 
+                      id='<%= snapshot_message_accordian_id(snapshot) %>' >
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a  class="accordion-toggle" 
+                            data-toggle="collapse" 
+                            data-parent="#<%= snapshot_message_accordian_id(snapshot) %>" 
+                            href="#<%= snapshot_message_table_id(snapshot) %>" >
+                        Messages
+                      </a>
+                    </div>
+                    <div id="<%= snapshot_message_table_id(snapshot) %>" 
+                        class="accordion-body collapse">
+                      <div class="accordion-inner">
+                          <table class='table table-condensed table-striped' >
+                            <% snapshot.messages.each do |m| %>
+                              <tr><td><%= m.sha %></td><td><%=  message_massage(m.text) %></td></tr>
+                              <% end %>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </td>
             </tr>
             <% end %>
         </table>
+     
       </div>

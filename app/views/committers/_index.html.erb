@@ -17,6 +17,7 @@
       <div id='<%= "recent_#{committer.id}" %>'  class="tab-pane active">
 
       <%= render "snap_shots/index",
+                repo: repo,
                 committer: committer, 
                 snapshots: repo.snapshots_for(committer) %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416164918) do
+ActiveRecord::Schema.define(:version => 20130418181401) do
 
   create_table "committers", :force => true do |t|
     t.string   "email"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20130416164918) do
     t.integer  "committer_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "snap_shot_id"
+    t.string   "text"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "sha"
   end
 
   create_table "repos", :force => true do |t|

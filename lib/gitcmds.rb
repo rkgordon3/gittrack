@@ -13,6 +13,7 @@ class SnapShotDesc
 	attr_accessor 	:loc_touched 
 	attr_accessor	:tags
 	attr_accessor	:committer_email
+	attr_accessor	:messages
 
 	def initialize
 		@files_touched = 0
@@ -22,10 +23,11 @@ class SnapShotDesc
 		@additions = 0
 		@loc_touched = 0
 		@tags = {}
+		@messages = []
 	end
 
 	def self.extract_tags(message)
-		message.downcase.scan(/user\s*story:?\s*(\d*)/).flatten
+		message.downcase.scan(/user\s*stor(y|ies):?\s*(\d*)/).flatten
 	end
 
 end
@@ -41,7 +43,7 @@ def persist(user, repo, snapshot, email)
 				puts "create new committer repo #{committer.id} #{repo_model.id}"
 		CommittersRepos.create!(committer_id: committer.id, repo_id: repo_model.id)
 	end
-	SnapShot.create!(repo_id: repo_model.id,
+	ss = SnapShot.create!(repo_id: repo_model.id,
 				 committer_id: committer.id,
 				 commit_count: count,
 				 files_touched: snapshot.files_touched/count,
@@ -50,6 +52,10 @@ def persist(user, repo, snapshot, email)
 				 loc_touched: snapshot.loc_touched/count,
 				 max_commit_size: snapshot.max_commit_size
 		) 
+	snapshot.messages.map { |m|  
+		puts "saving message #{m} with snap shot #{ss.id}"
+		Message.create!(snap_shot_id: ss.id, sha: m[0], text: m[1])
+	}
 end
 
 opts = Trollop::options  do
@@ -97,6 +103,7 @@ def fetch_commits(user, repo, since, persist = true )
 		    if (touched_this_commit > snapshot.max_commit_size) 
 		    	snapshot.max_commit_size = touched_this_commit
 		    end
+		    snapshot.messages << [c.sha[0..6] , c.commit.message ]
 		end
 		snapshots.keys.each  do |email|
 			s = snapshots[email]
