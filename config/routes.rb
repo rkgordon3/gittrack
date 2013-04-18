@@ -1,5 +1,11 @@
 Gittrack::Application.routes.draw do
-  resources :repos
+
+  resources :repos do
+    resources :snap_shots
+  end
+
+  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

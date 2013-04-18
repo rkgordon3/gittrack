@@ -1,6 +1,7 @@
       <div  id='<%= "recent_#{committer.id}" %>' class="tab-pane active">
         <table class="table table-striped table-bordered table-condensed" >
             <thead> 
+              <th></th>
               <th>Date</th> 
               <th>Time</th>
               <th>Total Commits</th>
@@ -11,8 +12,15 @@
               <th>Max. Commit Size</th>
             </thead>
             <% snapshots.each do |snapshot| %>
-            <tr>
-
+            <tr  id='<%= snapshot_table_row_id(repo, snapshot) %>' >
+                <td cellpadding="2" rowspan="2">
+                  <div style="margin-top:8px">
+                    <%= link_to  image_tag("delete.png", 
+                       size: "16x16") , repo_snap_shot_path(repo, snapshot), 
+                       method: :delete, 
+                       remote: true %>
+                  </div>
+                </td>
               <td><%= mmddyy(snapshot.created_at) %></td>
               <td><%= tod(snapshot.created_at) %></td>
               <td><%= snapshot.commit_count%> </td>
@@ -23,7 +31,7 @@
               <td><%= snapshot.max_commit_size%> </td>
              
             </tr>
-            <tr>
+            <tr id='<%= snapshot_message_row_id(repo, snapshot) %>'>
                 <td colspan='8'>
                 <div  class="accordion" 
                       id='<%= snapshot_message_accordian_id(snapshot) %>' >
@@ -35,6 +43,7 @@
                             href="#<%= snapshot_message_table_id(snapshot) %>" >
                         Messages
                       </a>
+
                     </div>
                     <div id="<%= snapshot_message_table_id(snapshot) %>" 
                         class="accordion-body collapse">

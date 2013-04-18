@@ -1,10 +1,9 @@
 <div class="accordion-group">
   <div class="accordion-heading">
-    <a  class="accordion-toggle" 
-      data-toggle="collapse" 
-      data-parent="#<%= parent_id %>" href="#<%= committer_accordian_id(committer) %>" >
-      <%= committer.email%>
-    </a>
+        <a  class="accordion-toggle" 
+          data-toggle="collapse" 
+          data-parent="#<%= parent_id %>" href="#<%= committer_accordian_id(committer) %>" >
+          <%= committer.email%>
   </div>
   <div id="<%= committer_accordian_id(committer) %>" class="accordion-body collapse">
     <ul  class="nav nav-tabs">

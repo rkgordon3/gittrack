@@ -19,5 +19,5 @@
 class SnapShot < ActiveRecord::Base
   attr_accessible :repo_id, :committer_id, :additions, :commit_count, :committer_email, :deletions, :files_touched, :loc_touched, :max_commit_size, :tags
   belongs_to :repo
-  has_many  :messages
+  has_many  :messages, :dependent => :destroy
 end
